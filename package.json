@@ -1,0 +1,35 @@
+{
+  "name": "luminaali-landing",
+  "version": "1.0.0",
+  "description": "landing page for luminaali.net",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf --glob html/*",
+    "build:scss": "node-sass --output-style compressed -o html src",
+    "watch:scss": "onchange \"src/*.scss\" -- npm run build:scss",
+    "build:html": "posthtml -c posthtml.json",
+    "watch:html": "onchange \"src/*.html\" -- npm run build:html",
+    "build:jpg": "copyfiles --flat src/*.jpg html",
+    "watch:jpg": "onchange \"src/*.jpg\" -- npm run build:jpg",
+    "build:png": "copyfiles --flat src/*.png html",
+    "watch:png": "onchange \"src/*.png\" -- npm run build:png",
+    "build:images": "run-p build:jpg build:png",
+    "serve": "browser-sync start --server \"html\" --files \"html\" --no-open",
+    "dev": "run-p serve watch:*",
+    "build": "run-p clean build:*"
+  },
+  "author": "Lumi Wahlman",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.29.3",
+    "copyfiles": "^2.4.1",
+    "htmlnano": "^2.0.4",
+    "node-sass": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.1.0",
+    "posthtml": "^0.16.6",
+    "posthtml-cli": "^0.7.7",
+    "rimraf": "^5.0.1"
+  }
+}
